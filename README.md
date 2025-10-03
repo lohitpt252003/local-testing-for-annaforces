@@ -8,8 +8,20 @@ The goal of this setup is to provide a way to visualize and test the problem dat
 
 ## Components
 
-1.  **`server.py`**: A lightweight Flask server that reads files from the `../DATA/data` directory and serves them over a simple API.
+1.  **`app.py`**: A lightweight Flask server that reads files from the `../DATA/data` directory and serves them over a simple API.
 2.  **`app/`**: A React application that fetches data from the local server and displays it.
+
+## Features Implemented
+
+*   **Theme Switching & Persistence:** The frontend now supports light and dark themes, with your preference saved in local storage.
+*   **Welcome Page:** A new landing page provides an introduction to the local viewer and navigation options.
+*   **Header Navigation:** The header includes links to the Problems, Contests, and Solutions pages, and the title links back to the Welcome Page.
+*   **Problem List Redesign:** The problems are displayed in a sortable table format, showing ID, Title (clickable to view details), Difficulty, Tags, Authors, and a link to view the Solution.
+*   **Problem Detail Page:** A dedicated page to view the full details of a problem, including description, input/output, constraints, notes, and sample cases. Supports KaTeX rendering and copy-to-clipboard for sample data.
+*   **Solution Detail Page:** A dedicated page to view the solution for a problem, accessible from the Problem Detail page or the Problem List.
+*   **Contest List Redesign:** The contests are displayed in a sortable table format, showing ID, Name, Description, Start Time, End Time, Authors, and a dynamic Status (Scheduled, Running, Finished).
+*   **Footer:** A simple footer is included at the bottom of the page.
+*   **Ubuntu Font:** The application uses the Ubuntu font family for a consistent look.
 
 ## How to Run
 
@@ -35,4 +47,4 @@ In your second terminal, navigate to the `app` directory and run the React devel
 npm start
 ```
 
-This will start the frontend application and should automatically open a new tab in your browser at `http://localhost:3001`. The page will display the problems it reads from your local `DATA` folder.
+This will start the frontend application and should automatically open a new tab in your browser at `http://localhost:3001`. The page will display the problems and contests it reads from your local `DATA` folder.

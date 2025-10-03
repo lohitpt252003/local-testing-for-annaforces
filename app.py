@@ -71,6 +71,15 @@ def get_problem_detail(problem_id):
 
     return jsonify(problem_data)
 
+@app.route('/problems/<string:problem_id>/solution', methods=['GET'])
+def get_problem_solution(problem_id):
+    """Endpoint to get the solution of a single problem."""
+    solution_path = os.path.join(DATA_DIR, 'solutions', problem_id, 'solution.md')
+    content = read_file_content(solution_path)
+    if content is None:
+        return jsonify({"error": "Solution not found"}), 404
+    return jsonify({"solution_content": content})
+
 @app.route('/contests', methods=['GET'])
 def get_contests():
     """Endpoint to get the list of all contests."""
