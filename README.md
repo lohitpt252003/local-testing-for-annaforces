@@ -20,8 +20,30 @@ The goal of this setup is to provide a way to visualize and test the problem dat
 *   **Problem Detail Page:** A dedicated page to view the full details of a problem, including description, input/output, constraints, notes, and sample cases. Supports KaTeX rendering and copy-to-clipboard for sample data.
 *   **Solution Detail Page:** A dedicated page to view the solution for a problem, accessible from the Problem Detail page or the Problem List.
 *   **Contest List Redesign:** The contests are displayed in a sortable table format, showing ID, Name, Description, Start Time, End Time, Authors, and a dynamic Status (Scheduled, Running, Finished).
+*   **Contest Detail Page:** A new dedicated page to view the full details of a contest, including its description, problems, and theory content.
+*   **Markdown and KaTeX Rendering:** Implemented robust Markdown and KaTeX rendering using `react-markdown`, `remark-math`, `rehype-katex`, and `rehype-raw`, ensuring correct display of mathematical expressions and formatted text.
+*   **Error Handling and Loading States:** Enhanced error handling to display specific "Not available" messages for missing content (e.g., 404 errors) and introduced a visual loading indicator for improved user feedback during data fetching.
+*   **Dynamic Page Titles:** The browser tab title now dynamically updates to reflect the content of the current page (e.g., "Problem: [Problem Title]", "Contest: [Contest Name]").
+*   **Favicon and Default Title:** Updated the application's favicon to a custom logo and changed the default browser tab title to "ANNAFORCES".
 *   **Footer:** A simple footer is included at the bottom of the page.
 *   **Ubuntu Font:** The application uses the Ubuntu font family for a consistent look.
+
+## API Endpoints
+
+### Problems
+
+*   `GET /problems`: Retrieves a list of all problems from `problems/index.json`.
+*   `GET /problems/<problem_id>`: Fetches detailed information for a specific problem.
+
+### Contests
+
+*   `GET /contests`: Gets a list of all contests from `contests/index.json`.
+*   `GET /contests/<contest_id>`: Retrieves details for a single contest.
+
+### Solutions
+
+*   `GET /solutions`: Retrieves a list of all available solution IDs.
+*   `GET /solutions/<problem_id>`: Returns the solution for a specific problem.
 
 ## How to Run
 
