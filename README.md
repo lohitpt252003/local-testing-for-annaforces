@@ -14,36 +14,55 @@ The goal of this setup is to provide a way to visualize and test the problem dat
 ## Features Implemented
 
 *   **Theme Switching & Persistence:** The frontend now supports light and dark themes, with your preference saved in local storage.
-*   **Welcome Page:** A new landing page provides an introduction to the local viewer and navigation options.
-*   **Header Navigation:** The header includes links to the Problems, Contests, and Solutions pages, and the title links back to the Welcome Page.
-*   **Problem List Redesign:** The problems are displayed in a sortable table format, showing ID, Title (clickable to view details), Difficulty, Tags, Authors, and a link to view the Solution.
-*   **Problem Detail Page:** A dedicated page to view the full details of a problem, including description, input/output, constraints, notes, and sample cases. Supports KaTeX rendering and copy-to-clipboard for sample data.
-*   **Solution Detail Page:** A dedicated page to view the solution for a problem, accessible from the Problem Detail page or the Problem List.
-*   **Contest List Redesign:** The contests are displayed in a sortable table format, showing ID, Name, Description, Start Time, End Time, Authors, and a dynamic Status (Scheduled, Running, Finished).
-*   **Contest Detail Page:** A new dedicated page to view the full details of a contest, including its description, problems, and theory content.
-*   **Markdown and KaTeX Rendering:** Implemented robust Markdown and KaTeX rendering using `react-markdown`, `remark-math`, `rehype-katex`, and `rehype-raw`, ensuring correct display of mathematical expressions and formatted text.
-*   **Error Handling and Loading States:** Enhanced error handling to display specific "Not available" messages for missing content (e.g., 404 errors) and introduced a visual loading indicator for improved user feedback during data fetching.
-*   **Dynamic Page Titles:** The browser tab title now dynamically updates to reflect the content of the current page (e.g., "Problem: [Problem Title]", "Contest: [Contest Name]").
-*   **Favicon and Default Title:** Updated the application's favicon to a custom logo and changed the default browser tab title to "ANNAFORCES".
-*   **Footer:** A simple footer is included at the bottom of the page.
-*   **Ubuntu Font:** The application uses the Ubuntu font family for a consistent look.
+*   **Welcome Page:** A new landing page provides an introduction to the local viewer and navigation options, including links to Problems, Contests, Solutions, and a sample Test Case page.
+*   **Header Navigation:** The header includes links to the Problems, Contests, Solutions, and a sample Test Cases page.
+*   **Problem List Redesign:** The problems are displayed in a sortable table format.
+*   **Contest List Redesign:** The contests are displayed in a sortable table format.
+*   **Solutions List Page:** A new page at `/solutions` that lists all available solutions in a styled table.
+*   **Collapsible Sections:** The Problem Detail (sample cases), Contest Detail (problem list), and Test Case Viewer pages now feature collapsible sections, which are collapsed by default to improve initial readability.
+*   **Problem Detail Page:** A dedicated page to view the full details of a problem. Supports KaTeX rendering and copy-to-clipboard for sample data.
+*   **Test Cases Viewer:** A dedicated page to view all sample and normal test cases for a problem, with a collapsible interface for easier navigation.
+*   **Solution Detail Page:** A dedicated page to view the solution for a problem, which also displays the original authors of the problem.
+*   **Contest Detail Page:** A new dedicated page to view the full details of a contest.
+*   **Markdown and KaTeX Rendering:** Implemented robust Markdown and KaTeX rendering.
+*   **Error Handling and Loading States:** Enhanced error handling and visual loading indicators.
+*   **Dynamic Page Titles:** The browser tab title now dynamically updates to reflect the content of the current page.
+*   **Data Provenance:** For enhanced clarity, the UI now displays the absolute file path for the directory of the currently viewed item (Problem, Contest, Test Case) and also shows the specific source file for each piece of data (e.g., `description.md`, `meta.json`).
+*   **Developer Experience:** Each major component now displays its own component file path in the top-right corner, aiding in debugging and development.
 
 ## API Endpoints
 
+All list endpoints return items sorted with the newest appearing first.
+
 ### Problems
 
-*   `GET /problems`: Retrieves a list of all problems from `problems/index.json`.
-*   `GET /problems/<problem_id>`: Fetches detailed information for a specific problem.
+*   `GET /problems`: Retrieves a list of all problems.
+*   `GET /problems/<problem_id>`: Fetches detailed information for a specific problem. The response is a JSON object where each field (e.g., `description`, `input`, `meta`) is an object containing the `content` and its source `file_path`.
+*   `GET /problems/<problem_id>/testcases`: Retrieves the sample and normal test cases. Each test case object in the response now includes its `name` (prefixed with `samples/` or `testcases/`), `input_file`, `output_file`, and the `absolute_path` of its directory.
+*   `GET /problems/<problem_id>/contests`: Retrieves a list of contests that include the specified problem.
 
 ### Contests
 
-*   `GET /contests`: Gets a list of all contests from `contests/index.json`.
-*   `GET /contests/<contest_id>`: Retrieves details for a single contest.
+*   `GET /contests`: Gets a list of all contests.
+*   `GET /contests/<contest_id>`: Retrieves details for a single contest. The response is a JSON object where each field (e.g., `contest`, `theory`, `meta`) is an object containing the `content` and its source `file_path`.
 
 ### Solutions
 
 *   `GET /solutions`: Retrieves a list of all available solution IDs.
-*   `GET /solutions/<problem_id>`: Returns the solution for a specific problem.
+*   `GET /solutions/<problem_id>`: Returns the solution for a specific problem. The response is a JSON object containing a `solution` object, which in turn holds the `content`, `file_path`, and the problem `authors`.
+
+## Development Conventions
+
+### CSS and Styling
+
+To maintain a clean and scalable structure, the project follows these styling conventions:
+
+*   **Component-Based CSS:** Every React component in `src/components` has its own dedicated folder.
+*   **Theme Files:** Each component folder contains three CSS files:
+    *   `index.css`: For common, theme-independent styles.
+    *   `light.css`: For styles specific to the light theme.
+    *   `dark.css`: For styles specific to the dark theme.
+*   **Class Naming:** CSS classes follow a `component-name-classname` convention.
 
 ## How to Run
 
@@ -69,4 +88,4 @@ In your second terminal, navigate to the `app` directory and run the React devel
 npm start
 ```
 
-This will start the frontend application and should automatically open a new tab in your browser at `http://localhost:3001`. The page will display the problems and contests it reads from your local `DATA` folder.
+This will start the frontend application and should automatically open a new tab in your browser at `http://localhost:3001`.
