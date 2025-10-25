@@ -1,0 +1,42 @@
+.light .welcome-page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 50px;
+  text-align: center;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.light .welcome-page-container h1 {
+  color: #1a1a1a;
+  font-size: 2.5rem;
+}
+
+.light .welcome-page-container p {
+  color: #555;
+  font-size: 1.2rem;
+  margin-bottom: 40px;
+}
+
+.light .welcome-page-links {
+  display: flex;
+  gap: 20px;
+}
+
+.light .welcome-page-link {
+  background-color: #007aff;
+  color: white;
+  padding: 15px 30px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.light .welcome-page-link:hover {
+  background-color: #0056b3;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 12px rgba(0,0,0,0.2);
+}

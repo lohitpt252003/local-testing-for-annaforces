@@ -1,0 +1,30 @@
+.contest-detail-container {
+    padding: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  
+  .contest-detail-container h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .contest-detail-container h2 {
+    font-size: 1.5rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+  }
+  
+  .contest-detail-container p {
+    line-height: 1.6;
+  }
+  
+  .contest-detail-container ul {
+    list-style-type: disc;
+    padding-left: 2rem;
+  }
+  
+  .contest-detail-container li {
+    margin-bottom: 0.5rem;
+  }

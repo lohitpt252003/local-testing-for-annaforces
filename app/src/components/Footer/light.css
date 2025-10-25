@@ -1,0 +1,28 @@
+.light .footer-container {
+  background-color: #f8f9fa;
+  color: #6c757d;
+}
+
+.light .logo-text span {
+  color: #007bff;
+}
+
+.light .footer-section ul li a {
+  color: #6c757d;
+}
+
+.light .footer-section ul li a:hover {
+  color: #007bff;
+}
+
+.light .social-links a {
+  color: #6c757d;
+}
+
+.light .social-links a:hover {
+  color: #007bff;
+}
+
+.light .footer-bottom {
+  border-top: 1px solid #e9ecef;
+}

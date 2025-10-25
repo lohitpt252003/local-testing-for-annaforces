@@ -1,0 +1,15 @@
+.light .testcases-viewer-container {
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+.light .testcases-viewer-case-container {
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+
+.light .testcases-viewer-case-container pre {
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+    color: #333;
+}

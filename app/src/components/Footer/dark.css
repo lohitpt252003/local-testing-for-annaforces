@@ -1,0 +1,28 @@
+.dark .footer-container {
+  background-color: #121212;
+  color: #a0a0a0;
+}
+
+.dark .logo-text span {
+  color: #007bff;
+}
+
+.dark .footer-section ul li a {
+  color: #a0a0a0;
+}
+
+.dark .footer-section ul li a:hover {
+  color: #007bff;
+}
+
+.dark .social-links a {
+  color: #a0a0a0;
+}
+
+.dark .social-links a:hover {
+  color: #007bff;
+}
+
+.dark .footer-bottom {
+  border-top: 1px solid #333;
+}

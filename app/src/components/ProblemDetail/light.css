@@ -1,0 +1,135 @@
+.light .problem-detail-container {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  color: #333;
+  border: 1px solid #e0e0e0;
+}
+
+.light .problem-detail-container h1 {
+  color: #1a1a1a;
+  font-size: 2.5rem;
+  margin-bottom: 25px;
+  text-align: center;
+  border-bottom: 2px solid #007aff;
+  padding-bottom: 10px;
+}
+
+.light .problem-detail-container h2 {
+  color: #1a1a1a;
+  font-size: 2rem;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 8px;
+}
+
+.light .problem-detail-container h3 {
+  color: #1a1a1a;
+  font-size: 1.6rem;
+  margin-top: 25px;
+}
+
+.light .problem-detail-container h4 {
+  color: #1a1a1a;
+  font-size: 1.3rem;
+  margin-top: 20px;
+}
+
+.light .problem-detail-container p {
+  color: #555;
+  line-height: 1.7;
+  margin-bottom: 12px;
+}
+
+.light .problem-detail-container pre {
+  background-color: #f8f8f8;
+  border: 1px solid #dcdcdc;
+  border-left: 4px solid #007aff;
+  border-radius: 8px;
+  padding: 15px;
+  overflow-x: auto;
+  font-family: 'Fira Code', 'Courier New', Courier, monospace;
+  font-size: 0.95em;
+  color: #333;
+  margin-top: 15px;
+  margin-bottom: 20px;
+}
+
+.light .problem-detail-sample-case {
+  margin-bottom: 30px;
+  padding: 20px;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  background-color: #fcfcfc;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+}
+
+.light .problem-detail-actions {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.light .problem-detail-view-solution-button {
+  display: inline-block;
+  background-color: #28a745;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color 0.3s;
+}
+
+.light .problem-detail-view-solution-button:hover {
+  background-color: #218838;
+}
+
+.light .problem-detail-contests {
+  margin: 25px 0;
+  padding: 15px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background-color: #f9fafb;
+}
+
+.light .problem-detail-contests strong {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.light .problem-detail-contests ul {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.light .problem-detail-contests li a {
+  text-decoration: none;
+  color: #007aff;
+}
+
+.light .problem-detail-contests li a:hover {
+  text-decoration: underline;
+}
+
+.light .problem-detail-view-testcases-button {
+  display: inline-block;
+  background-color: #007aff;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color 0.3s;
+}
+
+.light .problem-detail-view-testcases-button:hover {
+  background-color: #0056b3;
+}

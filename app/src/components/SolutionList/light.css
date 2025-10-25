@@ -1,0 +1,41 @@
+.light .solutionlist-container {
+  width: 80%;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.light .solutionlist-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  overflow: hidden;
+}
+
+.light .solutionlist-table th,
+.light .solutionlist-table td {
+  padding: 16px 20px;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.light .solutionlist-table th {
+  background-color: #f9fafb;
+  font-weight: 500;
+  color: #1a1a1a;
+}
+
+.light .solutionlist-table tbody tr:hover {
+  background-color: #f0f2f5;
+}
+
+.light .solutionlist-link {
+  color: #007aff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.light .solutionlist-link:hover {
+  text-decoration: underline;
+}

@@ -1,0 +1,46 @@
+.light .header-header-container {
+  background-color: #ffffff;
+  padding: 20px 40px;
+  color: #1a1a1a;
+  text-align: center;
+  border-bottom: 1px solid #e0e0e0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.light .header-title a {
+  text-decoration: none;
+  color: #1a1a1a;
+  font-size: 1.5rem;
+}
+
+.light .header-nav a {
+  text-decoration: none;
+  color: #1a1a1a;
+  margin: 0 15px;
+  font-weight: 500;
+  padding-bottom: 5px;
+  transition: border-bottom 0.3s;
+}
+
+.light .header-nav a:hover {
+  color: #007aff;
+  border-bottom: 2px solid #007aff;
+}
+
+.light .header-button {
+  background-color: #007aff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s;
+}
+
+.light .header-button:hover {
+  background-color: #0056b3;
+}

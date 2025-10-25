@@ -1,0 +1,53 @@
+.light .contestlist-contest-list-container {
+  width: 80%;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.light .contestlist-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  overflow: hidden;
+}
+
+.light .contestlist-table th,
+.light .contestlist-table td {
+  padding: 16px 20px;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.light .contestlist-table th {
+  background-color: #f9fafb;
+  font-weight: 500;
+  color: #1a1a1a;
+}
+
+.light .contestlist-table tbody tr:hover {
+  background-color: #f0f2f5;
+}
+
+.light .contestlist-status {
+  padding: 4px 8px;
+  border-radius: 5px;
+  font-weight: 500;
+  font-size: 0.85em;
+}
+
+.light .contestlist-status.running {
+  background-color: #e6ffe6;
+  color: #008000;
+}
+
+.light .contestlist-status.scheduled {
+  background-color: #fff3e0;
+  color: #ff8c00;
+}
+
+.light .contestlist-status.finished {
+  background-color: #ffe6e6;
+  color: #cc0000;
+}

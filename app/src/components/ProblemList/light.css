@@ -1,0 +1,56 @@
+.light .problemlist-problem-list-container {
+  width: 80%;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.light .problemlist-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  overflow: hidden;
+}
+
+.light .problemlist-table th,
+.light .problemlist-table td {
+  padding: 16px 20px;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.light .problemlist-table th {
+  background-color: #f9fafb;
+  font-weight: 500;
+  color: #1a1a1a;
+}
+
+.light .problemlist-table tbody tr:hover {
+  background-color: #f0f2f5;
+}
+
+.light .problemlist-title-link {
+  color: #007aff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.light .problemlist-title-link:hover {
+  text-decoration: underline;
+}
+
+.light .problemlist-solution-link {
+  display: inline-block;
+  background-color: #28a745;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 0.85em;
+  transition: background-color 0.3s;
+}
+
+.light .problemlist-solution-link:hover {
+  background-color: #218838;
+}

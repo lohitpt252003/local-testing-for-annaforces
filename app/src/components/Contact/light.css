@@ -1,0 +1,11 @@
+.light .contact-container {
+  background-color: #ffffff;
+  color: #1a1a1a;
+}
+
+.light .contact-form input,
+.light .contact-form textarea {
+  background-color: #f8f9fa;
+  color: #1a1a1a;
+  border: 1px solid #ccc;
+}

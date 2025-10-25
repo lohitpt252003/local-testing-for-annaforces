@@ -1,0 +1,52 @@
+@import './light.css';
+@import './dark.css';
+
+.testcases-viewer-container {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+.testcases-viewer-container h1, .testcases-viewer-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.testcases-viewer-container h2 {
+    margin-top: 40px;
+}
+
+.testcases-viewer-case-container {
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.testcases-viewer-case-container h4 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+}
+
+.testcases-viewer-case-container h5 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.testcases-viewer-case-container pre {
+    padding: 10px;
+    border-radius: 5px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.testcases-viewer-collapse-icon {
+    display: inline-block;
+    margin-right: 10px;
+    transition: transform 0.2s ease-in-out;
+}
+
+.testcases-viewer-collapse-icon.collapsed {
+    transform: rotate(-90deg);
+}
