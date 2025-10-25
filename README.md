@@ -4,7 +4,7 @@ This directory contains a self-contained environment for local testing of proble
 
 ## Purpose
 
-The goal of this setup is to provide a way to visualize and test the problem data stored in `../DATA` without needing to run the full backend application stack. It works by running a minimal local server that reads the files directly from the `DATA` directory and a simple React frontend that displays this data.
+The goal of this setup is to provide a way for **testers, problem setters, and developers** to visualize and test the problem data stored in `../DATA` without needing to run the full backend application stack. It works by running a minimal local server that reads the files directly from the `DATA` directory and a simple React frontend that displays this data.
 
 ## Components
 
@@ -19,6 +19,9 @@ The goal of this setup is to provide a way to visualize and test the problem dat
 *   **Problem List Redesign:** The problems are displayed in a sortable table format.
 *   **Contest List Redesign:** The contests are displayed in a sortable table format.
 *   **Solutions List Page:** A new page at `/solutions` that lists all available solutions in a styled table.
+*   **Test Cases Explorer:** A page that allows you to select any problem and view its test cases.
+*   **How to Use Page:** A dedicated page, accessible from the footer, that explains the features and purpose of the application.
+*   **Credits Page:** A page with detailed credits, accessible from the footer.
 *   **Collapsible Sections:** The Problem Detail (sample cases), Contest Detail (problem list), and Test Case Viewer pages now feature collapsible sections, which are collapsed by default to improve initial readability.
 *   **Problem Detail Page:** A dedicated page to view the full details of a problem. Supports KaTeX rendering and copy-to-clipboard for sample data.
 *   **Test Cases Viewer:** A dedicated page to view all sample and normal test cases for a problem, with a collapsible interface for easier navigation.
@@ -64,7 +67,45 @@ To maintain a clean and scalable structure, the project follows these styling co
     *   `dark.css`: For styles specific to the dark theme.
 *   **Class Naming:** CSS classes follow a `component-name-classname` convention.
 
-## How to Run
+## How to Run with Docker (Recommended)
+
+This project is configured to run with Docker Compose, which simplifies the setup of both the frontend and backend services.
+
+### Prerequisites
+
+- Docker
+- Docker Compose (usually included with Docker Desktop)
+
+### Running the Application
+
+1.  Navigate to the root of the `local-testing-for-annaforces` directory.
+2.  Run the following command:
+
+    ```bash
+    docker-compose up --build
+    ```
+
+This command will:
+- Build the Docker image for the backend service.
+- Build the Docker image for the frontend service.
+- Start both containers and connect them to a shared network.
+
+Once running, you can access:
+- The **frontend** at `http://localhost:3000`
+- The **backend** at `http://localhost:5001`
+
+### Docker Configuration
+
+- **`Dockerfile`**: Located in the root, this file defines the environment for the Python backend service.
+- **`app/Dockerfile`**: Located in the `app` directory, this file defines the environment for the React frontend service.
+- **`docker-compose.yml`**: This file orchestrates the building and running of both the `frontend` and `backend` services.
+
+**Note on Data Volume:** The `docker-compose.yml` file automatically mounts the `../DATA` directory into the backend container at `/app/DATA`, so the backend has access to all the necessary problem and contest data.
+
+## How to Run Manually (without Docker)
+
+<details>
+<summary>Click to expand</summary>
 
 You need to have two terminals open to run this environment.
 
@@ -89,3 +130,5 @@ npm start
 ```
 
 This will start the frontend application and should automatically open a new tab in your browser at `http://localhost:3001`.
+
+</details>
