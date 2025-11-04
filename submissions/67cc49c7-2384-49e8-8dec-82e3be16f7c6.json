@@ -1,0 +1,51 @@
+{
+    "id": "67cc49c7-2384-49e8-8dec-82e3be16f7c6",
+    "problem_id": "C2D",
+    "language": "python",
+    "code": "def solve(n):\n    for a in range(2, int(n**0.5) + 2):\n        if a * a > n:\n            break\n        if n % a == 0:\n            n2 = n // a\n            for b in range(a + 1, int(n2**0.5) + 2):\n                if b * b > n2:\n                    break\n                if n2 % b == 0:\n                    c = n2 // b\n                    if c > b:\n                        return \"YES\", a, b, c\n    return \"NO\", None, None, None\n\ndef main():\n    try:\n        num_test_cases = int(input())\n        for _ in range(num_test_cases):\n            n = int(input())\n            verdict, a, b, c = solve(n)\n            if verdict == \"YES\":\n                print(\"YES\")\n                print(a, b, c)\n            else:\n                print(\"NO\")\n    except (IOError, ValueError):\n        pass\n\nif __name__ == \"__main__\":\n    main()",
+    "results": [
+        {
+            "case": "samples/sample1",
+            "status": "Accepted",
+            "stdout": "YES\n2 4 8\nNO\nNO\nNO\nYES\n3 5 823\n",
+            "stderr": ""
+        },
+        {
+            "case": "testcases/1",
+            "status": "Accepted",
+            "stdout": "YES\n2 3 5\nYES\n2 3 12\nYES\n3 5 7\nYES\n2 3 35\nYES\n2 5 50\n",
+            "stderr": ""
+        },
+        {
+            "case": "testcases/2",
+            "status": "Accepted",
+            "stdout": "NO\nNO\nYES\n2 4 125000000\n",
+            "stderr": ""
+        },
+        {
+            "case": "testcases/3",
+            "status": "Accepted",
+            "stdout": "NO\n",
+            "stderr": ""
+        },
+        {
+            "case": "testcases/4",
+            "status": "Accepted",
+            "stdout": "NO\nYES\n2 3 166666666\n",
+            "stderr": ""
+        },
+        {
+            "case": "testcases/5",
+            "status": "Accepted",
+            "stdout": "NO\nNO\n",
+            "stderr": ""
+        },
+        {
+            "case": "testcases/6",
+            "status": "Accepted",
+            "stdout": "YES\n2 4 8\nNO\nNO\nNO\nYES\n3 5 823\n",
+            "stderr": ""
+        }
+    ],
+    "timestamp": "2025-11-03T18:26:33.021267"
+}

@@ -1,0 +1,17 @@
+.submission-list-container {
+    padding: 20px;
+}
+
+.submission-list-container table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.submission-list-container th, .submission-list-container td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.submission-list-container th {
+    background-color: #f2f2f2;
+}

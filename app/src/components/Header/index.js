@@ -13,6 +13,7 @@ function Header({ theme, toggleTheme }) {
         <Link to="/contests">Contests</Link>
         <Link to="/solutions">Solutions</Link>
         <Link to="/testcases">Test Cases</Link>
+        <Link to="/submissions">Submissions</Link>
       </nav>
       <button onClick={toggleTheme} className="header-button">
         Switch to {theme === 'light' ? 'Dark' : 'Light'} Mode

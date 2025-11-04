@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import MarkdownRenderer from '../MarkdownRenderer';
 import CopyButton from '../CopyButton';
+import SubmissionForm from '../SubmissionForm';
+import SubmissionResult from '../SubmissionResult';
 import './index.css';
 
 function ProblemDetail({ theme }) {
@@ -10,6 +12,7 @@ function ProblemDetail({ theme }) {
   const [partOfContests, setPartOfContests] = useState([]);
   const [error, setError] = useState(null);
   const [collapsedSamples, setCollapsedSamples] = useState({});
+  const [submissionResult, setSubmissionResult] = useState(null);
 
   useEffect(() => {
     const fetchProblemData = async () => {
@@ -158,6 +161,9 @@ function ProblemDetail({ theme }) {
       ) : (
         <p>No sample cases available.</p>
       )}
+
+      <SubmissionForm problemId={problemId} setSubmissionResult={setSubmissionResult} />
+      <SubmissionResult result={submissionResult} />
     </div>
   );
 }

@@ -1,0 +1,29 @@
+.submission-result {
+    margin-top: 20px;
+}
+
+.submission-result table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.submission-result th, .submission-result td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.submission-result th {
+    background-color: #f2f2f2;
+}
+
+.status-accepted {
+    background-color: #d4edda;
+}
+
+.status-wrong-answer, .status-validator-runtime-error-exit-code-1 {
+    background-color: #f8d7da;
+}
+
+.status-time-limit-exceeded {
+    background-color: #fff3cd;
+}

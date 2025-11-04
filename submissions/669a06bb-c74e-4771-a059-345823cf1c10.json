@@ -1,0 +1,87 @@
+{
+    "id": "669a06bb-c74e-4771-a059-345823cf1c10",
+    "problem_id": "C2E",
+    "language": "python",
+    "code": "n = int(input().strip())\nprint(n >> 1)",
+    "results": [
+        {
+            "case": "samples/sample1",
+            "status": "Accepted",
+            "stdout": "2\n",
+            "stderr": ""
+        },
+        {
+            "case": "testcases/1",
+            "status": "Accepted",
+            "stdout": "50\n",
+            "stderr": ""
+        },
+        {
+            "case": "testcases/10",
+            "status": "Accepted",
+            "stdout": "499999968\n",
+            "stderr": ""
+        },
+        {
+            "case": "testcases/11",
+            "status": "Accepted",
+            "stdout": "250000000\n",
+            "stderr": ""
+        },
+        {
+            "case": "testcases/12",
+            "status": "Accepted",
+            "stdout": "5000\n",
+            "stderr": ""
+        },
+        {
+            "case": "testcases/2",
+            "status": "Accepted",
+            "stdout": "1\n",
+            "stderr": ""
+        },
+        {
+            "case": "testcases/3",
+            "status": "Accepted",
+            "stdout": "1\n",
+            "stderr": ""
+        },
+        {
+            "case": "testcases/4",
+            "status": "Accepted",
+            "stdout": "2\n",
+            "stderr": ""
+        },
+        {
+            "case": "testcases/5",
+            "status": "Accepted",
+            "stdout": "2\n",
+            "stderr": ""
+        },
+        {
+            "case": "testcases/6",
+            "status": "Accepted",
+            "stdout": "5\n",
+            "stderr": ""
+        },
+        {
+            "case": "testcases/7",
+            "status": "Accepted",
+            "stdout": "61\n",
+            "stderr": ""
+        },
+        {
+            "case": "testcases/8",
+            "status": "Accepted",
+            "stdout": "499\n",
+            "stderr": ""
+        },
+        {
+            "case": "testcases/9",
+            "status": "Accepted",
+            "stdout": "500000000\n",
+            "stderr": ""
+        }
+    ],
+    "timestamp": "2025-11-03T19:54:54.668055"
+}

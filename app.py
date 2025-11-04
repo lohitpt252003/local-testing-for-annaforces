@@ -1,11 +1,31 @@
 import os
 import json
 import re
-from flask import Flask, jsonify, abort
+import subprocess
+import tempfile
+import requests
+import uuid
+import datetime
+from flask import Flask, jsonify, abort, request
 from flask_cors import CORS
+from dotenv import load_dotenv
+import logging # ADDED BY GEMINI
+
+load_dotenv()
 
 app = Flask(__name__)
 CORS(app)
+
+# Configure logging # ADDED BY GEMINI
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler("local_server.log"),
+        logging.StreamHandler()
+    ]
+)
+# END ADDED BY GEMINI
 
 # The absolute path to the DATA directory
 DATA_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'DATA', 'data'))
@@ -16,6 +36,53 @@ def read_file_content(path):
         return None
     with open(path, 'r', encoding='utf-8') as f:
         return f.read()
+
+def clean_md_content(content):
+    if content and content.strip().startswith("```") and content.strip().endswith("```"):
+        return '\n'.join(content.strip().split('\n')[1:-1])
+    return content
+
+def _read_cases_from_dir(directory, dir_type):
+    """Helper to read all test cases from a directory."""
+    cases = []
+    if not os.path.isdir(directory):
+        return cases
+
+    dir_items = os.listdir(directory)
+    has_subdirs = any(os.path.isdir(os.path.join(directory, item)) for item in dir_items)
+
+    if has_subdirs:
+        for case_folder in sorted(dir_items):
+            case_path = os.path.join(directory, case_folder)
+            if os.path.isdir(case_path):
+                input_content = clean_md_content(read_file_content(os.path.join(case_path, 'input.md')))
+                output_content = clean_md_content(read_file_content(os.path.join(case_path, 'output.md')))
+                cases.append({
+                    "name": f"{dir_type}/{case_folder}",
+                    "input": input_content,
+                    "output": output_content,
+                    "input_file": "input.md",
+                    "output_file": "output.md",
+                    "absolute_path": case_path
+                })
+    else:
+        in_files = sorted([f for f in dir_items if f.endswith('.in')])
+        for in_file in in_files:
+            name = os.path.splitext(in_file)[0]
+            out_file = f"{name}.out"
+            out_path = os.path.join(directory, out_file)
+            if os.path.exists(out_path):
+                input_content = clean_md_content(read_file_content(os.path.join(directory, in_file)))
+                output_content = clean_md_content(read_file_content(out_path))
+                cases.append({
+                    "name": f"{dir_type}/{name}",
+                    "input": input_content,
+                    "output": output_content,
+                    "input_file": in_file,
+                    "output_file": out_file,
+                    "absolute_path": directory
+                })
+    return cases
 
 @app.route('/problems', methods=['GET'])
 def get_problems():
@@ -231,48 +298,6 @@ def get_testcases(problem_id):
     if not os.path.isdir(problem_dir):
         return jsonify({"error": "Problem not found"}), 404
 
-    def _read_cases_from_dir(directory, dir_type):
-        """Helper to read all test cases from a directory."""
-        cases = []
-        if not os.path.isdir(directory):
-            return cases
-
-        dir_items = os.listdir(directory)
-        has_subdirs = any(os.path.isdir(os.path.join(directory, item)) for item in dir_items)
-
-        if has_subdirs:
-            for case_folder in sorted(dir_items):
-                case_path = os.path.join(directory, case_folder)
-                if os.path.isdir(case_path):
-                    input_content = read_file_content(os.path.join(case_path, 'input.md'))
-                    output_content = read_file_content(os.path.join(case_path, 'output.md'))
-                    cases.append({
-                        "name": f"{dir_type}/{case_folder}",
-                        "input": input_content,
-                        "output": output_content,
-                        "input_file": "input.md",
-                        "output_file": "output.md",
-                        "absolute_path": case_path
-                    })
-        else:
-            in_files = sorted([f for f in dir_items if f.endswith('.in')])
-            for in_file in in_files:
-                name = os.path.splitext(in_file)[0]
-                out_file = f"{name}.out"
-                out_path = os.path.join(directory, out_file)
-                if os.path.exists(out_path):
-                    input_content = read_file_content(os.path.join(directory, in_file))
-                    output_content = read_file_content(out_path)
-                    cases.append({
-                        "name": f"{dir_type}/{name}",
-                        "input": input_content,
-                        "output": output_content,
-                        "input_file": in_file,
-                        "output_file": out_file,
-                        "absolute_path": directory
-                    })
-        return cases
-
     samples_dir = os.path.join(problem_dir, 'samples')
     testcases_dir = os.path.join(problem_dir, 'testcases')
 
@@ -310,5 +335,168 @@ def get_problem_contests(problem_id):
     return jsonify([])
 
 
+@app.route('/problems/<string:problem_id>/submit', methods=['POST'])
+def submit_solution(problem_id):
+    """Endpoint to submit a solution for a problem."""
+    data = request.get_json()
+    if not data or 'code' not in data or 'language' not in data:
+        return jsonify({"error": "Missing code or language in request"}), 400
+
+    code = data['code']
+    language = data['language']
+    # Convert 'cpp' to 'c++' for judge service compatibility # ADDED BY GEMINI
+    if language == 'cpp':
+        language = 'c++'
+
+    match = re.match(r"C(\d+)([A-Z]+)", problem_id)
+    if not match:
+        return jsonify({"error": "Invalid problem_id format"}), 400
+    
+    contest_id_num = match.group(1)
+    problem_letter = match.group(2)
+    contest_id = f"C{contest_id_num}"
+
+    problem_dir = os.path.join(DATA_DIR, 'contests', contest_id, 'problems', problem_letter)
+    if not os.path.isdir(problem_dir):
+        return jsonify({"error": "Problem not found"}), 404
+
+    samples_dir = os.path.join(problem_dir, 'samples')
+    testcases_dir = os.path.join(problem_dir, 'testcases')
+
+    sample_cases = _read_cases_from_dir(samples_dir, 'samples')
+    normal_cases = _read_cases_from_dir(testcases_dir, 'testcases')
+    all_cases = sample_cases + normal_cases
+
+    judge_service_url = os.getenv('JUDGE_SERVICE_URL', 'http://localhost:5002')
+    execute_endpoint = os.getenv('JUDGE_EXECUTE_ENDPOINT', '/api/execute')
+    validate_endpoint = os.getenv('JUDGE_VALIDATE_ENDPOINT', '/api/validate')
+    results = []
+
+    for case in all_cases:
+        try:
+            # 1. Execute user's code
+            execute_payload = {
+                'code': code,
+                'language': language,
+                'stdin': case['input']
+            }
+            app.logger.info(f"Sending execute payload to judge service: {execute_payload}") # CHANGED BY GEMINI
+            execute_response = requests.post(f"{judge_service_url}{execute_endpoint}", json=execute_payload)
+            app.logger.info(f"Judge service execute response status: {execute_response.status_code}") # CHANGED BY GEMINI
+            app.logger.info(f"Judge service execute response body: {execute_response.text}") # CHANGED BY GEMINI
+            execute_response.raise_for_status()
+            execution_result = execute_response.json()
+
+            if execution_result.get('error'):
+                result = {"case": case['name'], "status": "Execution Error", "stdout": "", "stderr": execution_result['error']}
+                results.append(result)
+                continue
+
+            user_output = execution_result.get('stdout', '')
+
+            # 2. Validate the output
+            validator_script_name = os.getenv('VALIDATOR_SCRIPT_NAME', 'validator.py')
+            validator_path = os.path.join(problem_dir, validator_script_name)
+
+            if not os.path.exists(validator_path):
+                # Simple diff checker
+                if user_output.strip() == case['output'].strip():
+                    status = "Accepted"
+                else:
+                    status = "Wrong Answer"
+                result = {"case": case['name'], "status": status, "stdout": user_output, "stderr": ""}
+            else:
+                with open(validator_path, 'r') as f:
+                    validator_code = f.read()
+                
+                validate_payload = {
+                    'validator_code': validator_code,
+                    'validator_language': 'python',
+                    'user_output': user_output,
+                    'test_input': case['input']
+                }
+                app.logger.info(f"Sending validate payload to judge service: {validate_payload}") # CHANGED BY GEMINI
+                validate_response = requests.post(f"{judge_service_url}{validate_endpoint}", json=validate_payload)
+                app.logger.info(f"Judge service validate response status: {validate_response.status_code}") # CHANGED BY GEMINI
+                app.logger.info(f"Judge service validate response body: {validate_response.text}") # CHANGED BY GEMINI
+                validate_response.raise_for_status()
+                validation_result = validate_response.json()
+                
+                if validation_result.get('success'):
+                    status = validation_result.get('stdout', '').strip()
+                else:
+                    status = validation_result.get('err', 'Validation Error')
+                result = {"case": case['name'], "status": status, "stdout": user_output, "stderr": validation_result.get('stderr', '')}
+
+        except requests.exceptions.RequestException as e:
+            result = {"case": case['name'], "status": "Judge Service Error", "stdout": "", "stderr": str(e)}
+        except Exception as e:
+            result = {"case": case['name'], "status": "Internal Server Error", "stdout": "", "stderr": str(e)}
+        
+        results.append(result)
+
+    submission_id = str(uuid.uuid4())
+    submission_data = {
+        'id': submission_id,
+        'problem_id': problem_id,
+        'language': language,
+        'code': code,
+        'results': results,
+        'timestamp': datetime.datetime.utcnow().isoformat()
+    }
+
+    submission_dir = os.path.join(os.path.dirname(__file__), 'submissions')
+    if not os.path.exists(submission_dir):
+        os.makedirs(submission_dir)
+
+    submission_filepath = os.path.join(submission_dir, f"{submission_id}.json")
+    with open(submission_filepath, 'w') as f:
+        json.dump(submission_data, f, indent=4)
+
+    return jsonify({"results": results, "submission_id": submission_id})
+
+
 if __name__ == '__main__':
     app.run(debug=True, port=5001)
+
+@app.route('/submissions', methods=['GET'])
+def get_submissions():
+    """Endpoint to get the list of all submissions."""
+    submission_dir = os.path.join(os.path.dirname(__file__), 'submissions')
+    if not os.path.isdir(submission_dir):
+        return jsonify([])
+
+    submissions = []
+    for filename in os.listdir(submission_dir):
+        if filename.endswith('.json'):
+            filepath = os.path.join(submission_dir, filename)
+            with open(filepath, 'r') as f:
+                try:
+                    submission_data = json.load(f)
+                    submissions.append({
+                        'id': submission_data.get('id'),
+                        'problem_id': submission_data.get('problem_id'),
+                        'language': submission_data.get('language'),
+                        'timestamp': submission_data.get('timestamp')
+                    })
+                except json.JSONDecodeError:
+                    continue
+    
+    sorted_submissions = sorted(submissions, key=lambda x: x.get('timestamp', ''), reverse=True)
+    return jsonify(sorted_submissions)
+
+@app.route('/submissions/<string:submission_id>', methods=['GET'])
+def get_submission_detail(submission_id):
+    """Endpoint to get the details of a single submission."""
+    submission_dir = os.path.join(os.path.dirname(__file__), 'submissions')
+    submission_filepath = os.path.join(submission_dir, f"{submission_id}.json")
+
+    if not os.path.exists(submission_filepath):
+        return jsonify({"error": "Submission not found"}), 404
+
+    with open(submission_filepath, 'r') as f:
+        try:
+            submission_data = json.load(f)
+            return jsonify(submission_data)
+        except json.JSONDecodeError:
+            return jsonify({"error": "Invalid submission file"}), 500

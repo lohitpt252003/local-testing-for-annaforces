@@ -19,6 +19,8 @@ import Footer from './components/Footer';
 
 import PrivacyPolicy from './components/PrivacyPolicy';
 import Contact from './components/Contact';
+import SubmissionList from './components/SubmissionList';
+import SubmissionDetail from './components/SubmissionDetail';
 
 function App() {
   const [problems, setProblems] = useState(null);
@@ -76,6 +78,8 @@ function App() {
           <Route path="/credits" element={<Credits theme={theme} />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy theme={theme} />} />
           <Route path="/contact" element={<Contact theme={theme} />} />
+          <Route path="/submissions" element={<SubmissionList theme={theme} />} />
+          <Route path="/submissions/:submissionId" element={<SubmissionDetail theme={theme} />} />
         </Routes>
       </main>
       <Footer theme={theme} />

@@ -1,0 +1,87 @@
+{
+    "id": "c60a9218-fdb5-4eb5-b527-bf24cf83a7c1",
+    "problem_id": "C2E",
+    "language": "python",
+    "code": "n = int(input().split())\nprint(n >> 1)",
+    "results": [
+        {
+            "case": "samples/sample1",
+            "status": "Wrong Answer",
+            "stdout": "",
+            "stderr": ""
+        },
+        {
+            "case": "testcases/1",
+            "status": "Wrong Answer",
+            "stdout": "",
+            "stderr": ""
+        },
+        {
+            "case": "testcases/10",
+            "status": "Wrong Answer",
+            "stdout": "",
+            "stderr": ""
+        },
+        {
+            "case": "testcases/11",
+            "status": "Wrong Answer",
+            "stdout": "",
+            "stderr": ""
+        },
+        {
+            "case": "testcases/12",
+            "status": "Wrong Answer",
+            "stdout": "",
+            "stderr": ""
+        },
+        {
+            "case": "testcases/2",
+            "status": "Wrong Answer",
+            "stdout": "",
+            "stderr": ""
+        },
+        {
+            "case": "testcases/3",
+            "status": "Wrong Answer",
+            "stdout": "",
+            "stderr": ""
+        },
+        {
+            "case": "testcases/4",
+            "status": "Wrong Answer",
+            "stdout": "",
+            "stderr": ""
+        },
+        {
+            "case": "testcases/5",
+            "status": "Wrong Answer",
+            "stdout": "",
+            "stderr": ""
+        },
+        {
+            "case": "testcases/6",
+            "status": "Wrong Answer",
+            "stdout": "",
+            "stderr": ""
+        },
+        {
+            "case": "testcases/7",
+            "status": "Wrong Answer",
+            "stdout": "",
+            "stderr": ""
+        },
+        {
+            "case": "testcases/8",
+            "status": "Wrong Answer",
+            "stdout": "",
+            "stderr": ""
+        },
+        {
+            "case": "testcases/9",
+            "status": "Wrong Answer",
+            "stdout": "",
+            "stderr": ""
+        }
+    ],
+    "timestamp": "2025-11-03T19:42:07.696318"
+}

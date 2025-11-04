@@ -1,0 +1,11 @@
+.submission-detail-container {
+    padding: 20px;
+}
+
+.submission-detail-container pre {
+    background-color: #f4f4f4;
+    padding: 10px;
+    border: 1px solid #ddd;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}

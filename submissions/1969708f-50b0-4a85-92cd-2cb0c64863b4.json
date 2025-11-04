@@ -1,0 +1,69 @@
+{
+    "id": "1969708f-50b0-4a85-92cd-2cb0c64863b4",
+    "problem_id": "C2A",
+    "language": "python",
+    "code": "#include <stdio.h>\n\n// Define the maximum value of x\n#define MAX_X 1000000\n\n// Array to store the count of divisors for each number.\n// We use 'static' so it's initialized to all zeros by default.\nstatic int divisor_counts[MAX_X + 1];\n\n// Function to pre-compute the divisor counts for all numbers up to MAX_X\nvoid precompute_divisors() {\n    // Loop through all possible divisors 'i'\n    for (int i = 1; i <= MAX_X; i++) {\n        // Loop through all multiples 'j' of 'i'\n        // For each multiple 'j', 'i' is a divisor, so we increment its count.\n        for (int j = i; j <= MAX_X; j += i) {\n            divisor_counts[j]++;\n        }\n    }\n}\n\nint main() {\n    // Run the pre-computation once at the start.\n    precompute_divisors();\n\n    int n; // Number of integers\n    scanf(\"%d\", &n);\n\n    // Loop n times to process each query\n    for (int i = 0; i < n; i++) {\n        int x; // The integer for the current query\n        scanf(\"%d\", &x);\n\n        // Print the pre-computed answer from our array.\n        // This is an O(1) lookup.\n        printf(\"%d\\n\", divisor_counts[x]);\n    }\n\n    return 0;\n}\n",
+    "results": [
+        {
+            "case": "samples/sample1",
+            "status": "Validator Runtime Error (Exit Code: 1)",
+            "stdout": "",
+            "stderr": ""
+        },
+        {
+            "case": "testcases/1",
+            "status": "Validator Runtime Error (Exit Code: 1)",
+            "stdout": "",
+            "stderr": ""
+        },
+        {
+            "case": "testcases/2",
+            "status": "Validator Runtime Error (Exit Code: 1)",
+            "stdout": "",
+            "stderr": ""
+        },
+        {
+            "case": "testcases/3",
+            "status": "Validator Runtime Error (Exit Code: 1)",
+            "stdout": "",
+            "stderr": ""
+        },
+        {
+            "case": "testcases/4",
+            "status": "Validator Runtime Error (Exit Code: 1)",
+            "stdout": "",
+            "stderr": ""
+        },
+        {
+            "case": "testcases/5",
+            "status": "Validator Runtime Error (Exit Code: 1)",
+            "stdout": "",
+            "stderr": ""
+        },
+        {
+            "case": "testcases/6",
+            "status": "Validator Runtime Error (Exit Code: 1)",
+            "stdout": "",
+            "stderr": ""
+        },
+        {
+            "case": "testcases/7",
+            "status": "Validator Runtime Error (Exit Code: 1)",
+            "stdout": "",
+            "stderr": ""
+        },
+        {
+            "case": "testcases/8",
+            "status": "Validator Runtime Error (Exit Code: 1)",
+            "stdout": "",
+            "stderr": ""
+        },
+        {
+            "case": "testcases/9",
+            "status": "Validator Runtime Error (Exit Code: 1)",
+            "stdout": "",
+            "stderr": ""
+        }
+    ],
+    "timestamp": "2025-10-28T21:00:19.109633"
+}

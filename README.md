@@ -13,6 +13,7 @@ The goal of this setup is to provide a way for **testers, problem setters, and d
 
 ## Features Implemented
 
+*   **Submission and Judging:** The local testing environment now supports submitting solutions and getting them judged. This is handled by a new submission form on the problem detail page.
 *   **Theme Switching & Persistence:** The frontend now supports light and dark themes, with your preference saved in local storage.
 *   **Welcome Page:** A new landing page provides an introduction to the local viewer and navigation options, including links to Problems, Contests, Solutions, and a sample Test Case page.
 *   **Header Navigation:** The header includes links to the Problems, Contests, Solutions, and a sample Test Cases page.
@@ -43,6 +44,7 @@ All list endpoints return items sorted with the newest appearing first.
 *   `GET /problems/<problem_id>`: Fetches detailed information for a specific problem. The response is a JSON object where each field (e.g., `description`, `input`, `meta`) is an object containing the `content` and its source `file_path`.
 *   `GET /problems/<problem_id>/testcases`: Retrieves the sample and normal test cases. Each test case object in the response now includes its `name` (prefixed with `samples/` or `testcases/`), `input_file`, `output_file`, and the `absolute_path` of its directory.
 *   `GET /problems/<problem_id>/contests`: Retrieves a list of contests that include the specified problem.
+*   `POST /problems/<problem_id>/submit`: Submits a solution for a specific problem. The request body should be a JSON object with `code` and `language` fields.
 
 ### Contests
 
@@ -53,6 +55,17 @@ All list endpoints return items sorted with the newest appearing first.
 
 *   `GET /solutions`: Retrieves a list of all available solution IDs.
 *   `GET /solutions/<problem_id>`: Returns the solution for a specific problem. The response is a JSON object containing a `solution` object, which in turn holds the `content`, `file_path`, and the problem `authors`.
+
+### Environment Variables
+
+The local testing server can be configured using a `.env` file in the root of the `local-testing-for-annaforces` directory. The following variables are supported:
+
+*   `PYTHON_EXECUTABLE`: The path to the Python executable (defaults to `python`).
+*   `GPP_EXECUTABLE`: The path to the g++ executable (defaults to `g++`).
+*   `VALIDATOR_SCRIPT_NAME`: The name of the validator script (defaults to `validator.py`).
+*   `JUDGE_SERVICE_URL`: The URL of the judge service (defaults to `http://localhost:5002`).
+*   `JUDGE_EXECUTE_ENDPOINT`: The endpoint for code execution on the judge service (defaults to `/api/execute`).
+*   `JUDGE_VALIDATE_ENDPOINT`: The endpoint for validation on the judge service (defaults to `/api/validate`).
 
 ## Development Conventions
 

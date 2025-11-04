@@ -1,0 +1,69 @@
+{
+    "id": "940a6ae0-de21-4dbb-9e1d-b4447a74674b",
+    "problem_id": "C2A",
+    "language": "python",
+    "code": "def count_divisors(n):\n    if n == 0:\n        return 0\n    count = 0\n    for i in range(1, int(n**0.5) + 1):\n        if n % i == 0:\n            if n // i == i:\n                count += 1\n            else:\n                count += 2\n    return count\n\ndef main():\n    n = int(input())\n    results = []\n    for _ in range(n):\n        x = int(input())\n        results.append(str(count_divisors(x)))\n    print(\"\\n\".join(results))\n\nif __name__ == \"__main__\":\n    main()",
+    "results": [
+        {
+            "case": "samples/sample1",
+            "status": "Accepted",
+            "stdout": "5\n2\n6\n",
+            "stderr": ""
+        },
+        {
+            "case": "testcases/1",
+            "status": "Accepted",
+            "stdout": "5\n2\n6\n",
+            "stderr": ""
+        },
+        {
+            "case": "testcases/2",
+            "status": "Accepted",
+            "stdout": "2\n2\n3\n4\n6\n",
+            "stderr": ""
+        },
+        {
+            "case": "testcases/3",
+            "status": "Accepted",
+            "stdout": "9\n24\n2\n11\n8\n49\n",
+            "stderr": ""
+        },
+        {
+            "case": "testcases/4",
+            "status": "Accepted",
+            "stdout": "9\n3\n7\n2\n",
+            "stderr": ""
+        },
+        {
+            "case": "testcases/5",
+            "status": "Accepted",
+            "stdout": "24\n30\n32\n60\n1\n2\n",
+            "stderr": ""
+        },
+        {
+            "case": "testcases/6",
+            "status": "Accepted",
+            "stdout": "1\n2\n2\n3\n2\n4\n2\n4\n3\n4\n",
+            "stderr": ""
+        },
+        {
+            "case": "testcases/7",
+            "status": "Accepted",
+            "stdout": "5\n2\n6\n9\n2\n",
+            "stderr": ""
+        },
+        {
+            "case": "testcases/8",
+            "status": "Accepted",
+            "stdout": "49\n",
+            "stderr": ""
+        },
+        {
+            "case": "testcases/9",
+            "status": "Accepted",
+            "stdout": "2\n",
+            "stderr": ""
+        }
+    ],
+    "timestamp": "2025-11-03T17:56:06.345767"
+}

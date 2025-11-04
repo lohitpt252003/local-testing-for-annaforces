@@ -28,6 +28,11 @@ This project can be run easily using Docker. For detailed instructions, please s
 *   **How to Use Page:** A dedicated page, accessible from the footer, that explains the features and purpose of the application.
 *   **Credits Page:** A page with detailed credits, accessible from the footer.
 
+### Submission Components
+
+*   **`SubmissionForm`**: A new component added to the `ProblemDetail` page. It provides a code editor (textarea) and a language selector for submitting solutions.
+*   **`SubmissionResult`**: This component is used to display the results of a submission. It shows a table with the status for each test case (e.g., Accepted, Wrong Answer, etc.).
+
 ## Available Scripts
 
 In the project directory, you can run:
